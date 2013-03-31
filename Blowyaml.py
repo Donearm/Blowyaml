@@ -159,24 +159,27 @@ if __name__ == '__main__':
         else:
             y = options.filelist[0]
         with open(y, "r") as f:
-            content = yaml.load(f.read())
-            for k, v in content.iteritems():
-                if re.search(s, k):
-                    print(k)
-                    for i, o in v.iteritems():
-                        if isinstance(o, dict):
-                            for sk, so in o.iteritems():
+            if options.cat:
+                content = yaml.dump(f.read(), allow_unicode=True)
+            else:
+                content = yaml.load(f.read())
+                for k, v in content.iteritems():
+                    if re.search(s, k):
+                        print(k)
+                        for i, o in v.iteritems():
+                            if isinstance(o, dict):
+                                for sk, so in o.iteritems():
+                                    try:
+                                        print(sk + " is " + so)
+                                    except TypeError as e:
+                                        if sk == "disabled" and so == True:
+                                            print(k + " is disabled")
+                            else:
                                 try:
-                                    print(sk + " is " + so)
+                                    print(i + " is " + o)
                                 except TypeError as e:
-                                    if sk == "disabled" and so == True:
+                                    if i == "disabled" and o == True:
                                         print(k + " is disabled")
-                        else:
-                            try:
-                                print(i + " is " + o)
-                            except TypeError as e:
-                                if i == "disabled" and o == True:
-                                    print(k + " is disabled")
 
 
     erase_key(key)
