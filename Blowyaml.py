@@ -26,9 +26,11 @@ __status__ = "beta"
 import os
 import sys
 import argparse
+import re
 from random import randrange
-from Crypto.Cipher import Blowfish
 from getpass import getpass
+from Crypto.Cipher import Blowfish
+import yaml
 
 class BFCipher:
     def __init__(self, pword):
@@ -81,6 +83,11 @@ def argument_parser():
             action="store_true",
             help="`cat` file to stdout",
             dest="cat")
+    p.add_argument("-s", "--search",
+            action="store",
+            help="search for a key in the output file (YAML)",
+            nargs=1,
+            dest="searchkey")
     p.add_argument(action="store",
             help="infile outfile",
             nargs='+',
@@ -143,5 +150,31 @@ if __name__ == '__main__':
     else:
         # wtf?!
         sys.exit(2)
+
+    if options.searchkey:
+        s = ' '.join(options.searchkey)
+        # if we have just decrypted, use the output file; otherwise, the input
+        if options.decrypt:
+            y = options.filelist[1]
+        else:
+            y = options.filelist[0]
+        with open(y, "r") as f:
+            content = yaml.load(f.read())
+            for k, v in content.iteritems():
+                if re.search(s, k):
+                    print(k)
+                    for i, o in v.iteritems():
+                        if isinstance(o, dict):
+                            for sk, so in o.iteritems():
+                                try:
+                                    print(sk + " is " + so)
+                                except TypeError as e:
+                                    print(e)
+                        else:
+                            try:
+                                print(i + " is " + o)
+                            except TypeError as e:
+                                print(e)
+
 
     erase_key(key)
