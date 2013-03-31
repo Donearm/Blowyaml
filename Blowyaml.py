@@ -169,12 +169,14 @@ if __name__ == '__main__':
                                 try:
                                     print(sk + " is " + so)
                                 except TypeError as e:
-                                    print(e)
+                                    if sk == "disabled" and so == True:
+                                        print(k + " is disabled")
                         else:
                             try:
                                 print(i + " is " + o)
                             except TypeError as e:
-                                print(e)
+                                if i == "disabled" and o == True:
+                                    print(k + " is disabled")
 
 
     erase_key(key)
