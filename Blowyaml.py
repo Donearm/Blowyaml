@@ -178,15 +178,15 @@ if __name__ == '__main__':
                     for k, v in content.iteritems():
                         if re.search(s, k):
                             found = True
-                            print(k)
                             for i, o in v.iteritems():
                                 if isinstance(o, dict):
+                                    print(i)
                                     for sk, so in o.iteritems():
                                         try:
                                             print(sk + " is " + so)
                                         except TypeError as e:
                                             if sk == "disabled" and so == True:
-                                                print(k + " is disabled")
+                                                print(k + ", " + i + " is disabled")
                                 else:
                                     try:
                                         print(i + " is " + o)
