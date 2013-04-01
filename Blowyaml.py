@@ -174,9 +174,10 @@ if __name__ == '__main__':
             else:
                 try:
                     content = yaml.load(f.read())
-                    print(s)
+                    found = False
                     for k, v in content.iteritems():
                         if re.search(s, k):
+                            found = True
                             print(k)
                             for i, o in v.iteritems():
                                 if isinstance(o, dict):
@@ -192,9 +193,8 @@ if __name__ == '__main__':
                                     except TypeError as e:
                                         if i == "disabled" and o == True:
                                             print(k + " is disabled")
-                        else:
-                            print("\nKey not found")
-                            break
+                    if not found:
+                        print("\nKey not found")
                 except yaml.reader.ReaderError:
                     yaml_error_exit()
 
