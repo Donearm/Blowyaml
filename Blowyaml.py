@@ -180,6 +180,9 @@ if __name__ == '__main__':
                                 except TypeError as e:
                                     if i == "disabled" and o == True:
                                         print(k + " is disabled")
+                    else:
+                        print("\nKey not found")
+                        break
 
 
     erase_key(key)
