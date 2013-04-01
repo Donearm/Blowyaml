@@ -106,6 +106,12 @@ def erase_key(k):
     key = 'x'*len(k)
     del key
 
+def yaml_error_exit():
+    """Exit nicely after a yaml.reader.ReaderError"""
+    print("\nCan't read the yaml file. " \
+            "Typed the wrong password maybe?")
+    sys.exit(1)
+
 
 if __name__ == '__main__':
 
@@ -160,29 +166,38 @@ if __name__ == '__main__':
             y = options.filelist[0]
         with open(y, "r") as f:
             if options.cat:
-                content = yaml.dump(f.read(), allow_unicode=True)
+                try:
+                    content = yaml.dump(f.read(), allow_unicode=True)
+                except yaml.reader.ReaderError:
+                    # if PyYaml can't read it, the file is still crypted
+                    yaml_error_exit()
             else:
-                content = yaml.load(f.read())
-                for k, v in content.iteritems():
-                    if re.search(s, k):
-                        print(k)
-                        for i, o in v.iteritems():
-                            if isinstance(o, dict):
-                                for sk, so in o.iteritems():
+                try:
+                    content = yaml.load(f.read())
+                    print(s)
+                    for k, v in content.iteritems():
+                        if re.search(s, k):
+                            print(k)
+                            for i, o in v.iteritems():
+                                if isinstance(o, dict):
+                                    for sk, so in o.iteritems():
+                                        try:
+                                            print(sk + " is " + so)
+                                        except TypeError as e:
+                                            if sk == "disabled" and so == True:
+                                                print(k + " is disabled")
+                                else:
                                     try:
-                                        print(sk + " is " + so)
+                                        print(i + " is " + o)
                                     except TypeError as e:
-                                        if sk == "disabled" and so == True:
+                                        if i == "disabled" and o == True:
                                             print(k + " is disabled")
-                            else:
-                                try:
-                                    print(i + " is " + o)
-                                except TypeError as e:
-                                    if i == "disabled" and o == True:
-                                        print(k + " is disabled")
-                    else:
-                        print("\nKey not found")
-                        break
+                        else:
+                            print("\nKey not found")
+                            break
+                except yaml.reader.ReaderError:
+                    yaml_error_exit()
+
 
 
     erase_key(key)
