@@ -187,12 +187,16 @@ if __name__ == '__main__':
                                         except TypeError as e:
                                             if sk == "disabled" and so == True:
                                                 print(k + ", " + i + " is disabled")
+                                            elif isinstance(so, int):
+                                                print(sk + " is " + str(so))
                                 else:
                                     try:
                                         print(i + " is " + o)
                                     except TypeError as e:
                                         if i == "disabled" and o == True:
                                             print(k + " is disabled")
+                                        elif isinstance(o, int):
+                                            print(i + " is " + str(o))
                     if not found:
                         print("\nKey not found")
                 except yaml.reader.ReaderError:
