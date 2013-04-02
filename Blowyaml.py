@@ -30,6 +30,7 @@ import re
 from random import randrange
 from getpass import getpass
 from Crypto.Cipher import Blowfish
+from orddict import OrderedDictYAMLLoader
 import yaml
 
 class BFCipher:
@@ -173,7 +174,7 @@ if __name__ == '__main__':
                     yaml_error_exit()
             else:
                 try:
-                    content = yaml.load(f.read())
+                    content = yaml.load(f.read(), OrderedDictYAMLLoader)
                     found = False
                     for k, v in content.iteritems():
                         if re.search(s, k):
