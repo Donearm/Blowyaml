@@ -1,7 +1,7 @@
 Quick script to encrypt and decrypt a YAML file storing passwords with the 
-Blowfish algorithm. As the YAML file format is customized to my own needs, 
-Blowyaml is more an example than a real use case. In any way, I hope it's at 
-least of some inspiration to you.
+Blowfish algorithm. The YAML file is used to store accounts' login credentials.
+As its format is customized to my own needs, Blowyaml is more an example than a 
+real use case. In any way, I hope it's at least of some inspiration to you.
 
 ##Requirements
 
@@ -37,3 +37,7 @@ at the end of the array to mark sites that I don't use anymore. It may be
 because the site died some time ago (and I like to keep login credentials anyway 
 just to remember what passwords I already used) or because I don't find it 
 useful anymore but it doesn't allow deleting the account (damn you!)
+
+##Todo
+
+* Python3 support
