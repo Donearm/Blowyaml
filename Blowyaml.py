@@ -67,6 +67,12 @@ class BFCipher:
             pad_bytes = 8
         return file_buffer[:-pad_bytes]
 
+class ansicolors:
+    """Colorize terminal output with ANSI color codes"""
+    red = "\033[0;31m"
+    blue = "\033[1;34m"
+    reset = "\033[0m"
+
 def argument_parser():
     p = argparse.ArgumentParser()
 
@@ -181,25 +187,25 @@ if __name__ == '__main__':
                             found = True
                             for i, o in v.iteritems():
                                 if isinstance(o, dict):
-                                    print(i)
+                                    print(ansicolors.red + i + ansicolors.reset)
                                     for sk, so in o.iteritems():
                                         try:
-                                            print(sk + " is " + so)
+                                            print(ansicolors.blue + sk + ansicolors.reset + " is " + so)
                                         except TypeError as e:
                                             if sk == "disabled" and so == True:
-                                                print(k + ", " + i + " is disabled")
+                                                print(k + ", " + ansicolors.red + i + ansicolors.reset + " is disabled")
                                             elif isinstance(so, int):
-                                                print(sk + " is " + str(so))
+                                                print(ansicolors.blue + sk + ansicolors.reset + " is " + str(so))
                                 else:
                                     try:
-                                        print(i + " is " + o)
+                                        print(ansicolors.blue + i + ansicolors.reset + " is " + o)
                                     except TypeError as e:
                                         if i == "disabled" and o == True:
-                                            print(k + " is disabled")
+                                            print(ansicolors.red + k + ansicolors.reset + " is disabled")
                                         elif isinstance(o, int):
-                                            print(i + " is " + str(o))
+                                            print(ansicolors.blue + i + ansicolors.reset + " is " + str(o))
                     if not found:
-                        print("\nKey not found")
+                        print(ansicolors.red + "\nKey not found" + ansicolors.reset)
                 except yaml.reader.ReaderError:
                     yaml_error_exit()
 
