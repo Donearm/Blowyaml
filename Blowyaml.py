@@ -190,20 +190,20 @@ if __name__ == '__main__':
                                     print(ansicolors.red + i + ansicolors.reset)
                                     for sk, so in o.iteritems():
                                         try:
-                                            print(ansicolors.blue + sk + ansicolors.reset + " is " + so)
+                                            print("\t" + ansicolors.blue + sk + ansicolors.reset + " is " + so)
                                         except TypeError as e:
                                             if sk == "disabled" and so == True:
                                                 print(k + ", " + ansicolors.red + i + ansicolors.reset + " is disabled")
                                             elif isinstance(so, int):
-                                                print(ansicolors.blue + sk + ansicolors.reset + " is " + str(so))
+                                                print("\t" + ansicolors.blue + sk + ansicolors.reset + " is " + str(so))
                                 else:
                                     try:
-                                        print(ansicolors.blue + i + ansicolors.reset + " is " + o)
+                                        print("\t" + ansicolors.blue + i + ansicolors.reset + " is " + o)
                                     except TypeError as e:
                                         if i == "disabled" and o == True:
                                             print(ansicolors.red + k + ansicolors.reset + " is disabled")
                                         elif isinstance(o, int):
-                                            print(ansicolors.blue + i + ansicolors.reset + " is " + str(o))
+                                            print("\t" + ansicolors.blue + i + ansicolors.reset + " is " + str(o))
                     if not found:
                         print(ansicolors.red + "\nKey not found" + ansicolors.reset)
                 except yaml.reader.ReaderError:
