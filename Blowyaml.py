@@ -19,7 +19,7 @@ __credits__ = ""
 __license__ = "GPL"
 __version__ = "0.2"
 __mantainer__ = ""
-__date__ = "20130329"
+__date__ = "20141026"
 __email__ = "forod.g@gmail.com"
 __status__ = "beta"
 
