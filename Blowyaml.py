@@ -74,6 +74,7 @@ class ansicolors:
     reset = "\033[0m"
 
 def argument_parser():
+    """Argument parser"""
     p = argparse.ArgumentParser()
 
     # you can either decrypt, encrypt or print the file to stdout
@@ -104,6 +105,7 @@ def argument_parser():
     return options, p
 
 def writefile(outfile_name, file_buffer):
+    """Write buffer to file"""
     outfile = open(outfile_name, 'wb')
     outfile.write(file_buffer)
     outfile.close()
