@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Donearm/Blowyaml.svg)](https://travis-ci.org/Donearm/Blowyaml)
+
 Quick script to encrypt and decrypt a YAML file storing passwords with the 
 Blowfish algorithm. The YAML file is used to store accounts' login credentials.
 As its format is customized to my own needs, Blowyaml is more an example than a 
