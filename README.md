@@ -5,12 +5,12 @@ Blowfish algorithm. The YAML file is used to store accounts' login credentials.
 As its format is customized to my own needs, Blowyaml is more an example than a 
 real use case. In any way, I hope it's at least of some inspiration to you.
 
-##Requirements
+## Requirements
 
 * pycrypto
 * pyyaml
 
-##YAML file format
+## YAML file format
 
 I'm using a customized way to keep login informations in the YAML format. 
 Blowyaml is based on this so _it works for me_™.
@@ -40,6 +40,6 @@ because the site died some time ago (and I like to keep login credentials anyway
 just to remember what passwords I already used) or because I don't find it 
 useful anymore but it doesn't allow deleting the account (damn you!)
 
-##Todo
+## Todo
 
 * Python3 support
