@@ -35,7 +35,7 @@ import yaml
 
 class BFCipher:
     def __init__(self, pword):
-        self.__cipher = Blowfish.new(pword)
+        self.__cipher = Blowfish.new(pword, Blowfish.MODE_ECB)
 
     def encrypt(self, file_buffer):
         ciphertext = self.__cipher.encrypt(self.__pad_file(file_buffer))
